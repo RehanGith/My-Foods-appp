@@ -10,6 +10,7 @@ android {
     defaultConfig {
         applicationId = "com.example.myfoods"
         minSdk = 24
+        //noinspection OldTargetApi
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -27,6 +28,7 @@ android {
         }
     }
     buildFeatures{
+        //noinspection DataBindingWithoutKapt
         dataBinding = true
     }
     compileOptions {
@@ -39,6 +41,14 @@ android {
 }
 
 dependencies {
+    //ssp and sdp libraries
+    implementation(libs.intuit.sdp)
+    implementation(libs.intuit.ssp)
+    //gif library
+    implementation(libs.pl.droidsonroids.gif)
+    //navigation libraries
+    implementation(libs.androidx.navigation.ui)
+    implementation(libs.androidx.navigation.fragment)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

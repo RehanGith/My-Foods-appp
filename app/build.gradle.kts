@@ -10,7 +10,6 @@ android {
     defaultConfig {
         applicationId = "com.example.myfoods"
         minSdk = 24
-        //noinspection OldTargetApi
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -28,7 +27,6 @@ android {
         }
     }
     buildFeatures{
-        //noinspection DataBindingWithoutKapt
         dataBinding = true
     }
     compileOptions {

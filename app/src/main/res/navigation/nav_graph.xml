@@ -15,9 +15,9 @@
         android:name="com.example.myfoods.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" />
-    <fragment
-        android:id="@+id/catagoriesFragment"
-        android:name="com.example.myfoods.CatagoriesFragment"
-        android:label="fragment_catagories"
-        tools:layout="@layout/fragment_catagories" />
+        <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="com.example.myfoods.CategoriesFragment"
+        android:label="fragment_categories"
+        tools:layout="@layout/fragment_categories" />
 </navigation>

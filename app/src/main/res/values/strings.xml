@@ -10,4 +10,7 @@
     <string name="what_would_you_like_to_eat">What would you like to eat</string>
     <string name="our_populer_foods">Our Populer foods</string>
     <string name="random_meal">random Meal</string>
+    <string name="instructions">"- Instructions : "</string>
+    <string name="AreaInfo">%1$s%2$s</string>
+    <string name="catagory_info">%1$s%2$s</string>
 </resources>

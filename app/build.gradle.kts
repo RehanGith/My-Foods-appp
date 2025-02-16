@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kotlin.ksp)
 }
 
 android {
@@ -54,7 +55,13 @@ dependencies {
     //navigation libraries
     implementation(libs.androidx.navigation.ui)
     implementation(libs.androidx.navigation.fragment)
-
+    //room database
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
+    //viewModel
+    implementation(libs.androidx.lifecyle.viewmodel)
+    //coroutines
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

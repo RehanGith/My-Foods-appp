@@ -1,4 +1,4 @@
-package com.example.myfoods.Screens
+package com.example.myfoods.Screens.CategoryDetail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

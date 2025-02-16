@@ -1,5 +1,9 @@
 package com.example.myfoods.Model
 
+import androidx.room.Entity
+import java.io.Serializable
+
+@Entity
 data class Meal(
     val dateModified: Any? = null,
     val idMeal: String? = null,
@@ -54,4 +58,4 @@ data class Meal(
     val strSource: String? = null,
     val strTags: String? = null,
     val strYoutube: String? = null
-)
+) : Serializable

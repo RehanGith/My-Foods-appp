@@ -1,4 +1,4 @@
-package com.example.myfoods.Screens
+package com.example.myfoods.Screens.Category
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.example.myfoods.R
 
 
-class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
+class CategoriesFragment : Fragment(R.layout.fragment_categories) {
+
 
 }

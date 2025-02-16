@@ -7,17 +7,41 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.myfoods.Screens.HomeFragment"
+        android:name="com.example.myfoods.Screens.Home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_mealDetail"
+            app:destination="@id/mealDetail" />
+    </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.example.myfoods.Screens.FavoritesFragment"
+        android:name="com.example.myfoods.Screens.Favorites.FavoritesFragment"
         android:label="fragment_favorites"
-        tools:layout="@layout/fragment_favorites" />
-        <fragment
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_mealDetail"
+            app:destination="@id/mealDetail" />
+    </fragment>
+    <fragment
         android:id="@+id/categoriesFragment"
-        android:name="com.example.myfoods.Screens.CategoriesFragment"
+        android:name="com.example.myfoods.Screens.Category.CategoriesFragment"
         android:label="fragment_categories"
-        tools:layout="@layout/fragment_categories" />
+        tools:layout="@layout/fragment_categories" >
+        <action
+            android:id="@+id/action_categoriesFragment_to_mealDetail"
+            app:destination="@id/mealDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/mealDetail"
+        android:name="com.example.myfoods.Screens.MealDetail.MealDetail"
+        android:label="activity_meal_detailes"
+        tools:layout="@layout/activity_meal_detailes">
+        <argument
+            android:name="meal"
+            app:argType="com.example.myfoods.Model.Meal"
+        />
+    </fragment>
+
+
 </navigation>

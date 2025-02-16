@@ -42,6 +42,11 @@ class MealDetail : Fragment(R.layout.activity_meal_detailes) {
 
     private fun setTextsInViews(meal: Meal) {
         binding.apply {
+            Glide.with(this@MealDetail)
+                .load(meal.strMealThumb ?: R.drawable.ic_launcher_foreground)
+                .into(imgMealDetail)
+            collapsingToolbar.setCollapsedTitleTextColor(resources.getColor(R.color.white))
+            collapsingToolbar.setExpandedTitleColor(resources.getColor(R.color.white))
             tvInstructions.text = getString(R.string.instructions)
             tvContent.text = meal.strInstructions
             tvAreaInfo.visibility = View.VISIBLE
@@ -51,9 +56,7 @@ class MealDetail : Fragment(R.layout.activity_meal_detailes) {
                 getString(R.string.catagory_info, tvCategoryInfo.text, meal.strCategory)
             imgYoutube.visibility = View.VISIBLE
             collapsingToolbar.title = meal.strMeal
-            Glide.with(this@MealDetail)
-                .load(meal.strMealThumb ?: R.drawable.ic_launcher_foreground)
-                .into(imgMealDetail)
+
         }
     }
 

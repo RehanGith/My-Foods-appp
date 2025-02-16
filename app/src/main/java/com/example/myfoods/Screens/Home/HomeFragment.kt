@@ -36,8 +36,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         observeRandomMeal()
 
         binding.imgRandomMeal.setOnClickListener {
-            viewModel.randomMeal.let { meal ->
-                meal.value?.let { it1 -> onMealClick(it1) }
+            viewModel.randomMeal.observe(viewLifecycleOwner) { meal ->
+                meal?.let { it1 -> onMealClick(it1) }
             }
         }
     }
@@ -49,7 +49,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         findNavController().navigate(R.id.action_homeFragment_to_mealDetail, bundle)
     }
     private fun observeRandomMeal() {
-        viewModel.randomMeal.observe(viewLifecycleOwner) { it ->
+        viewModel.randomMeal.observe(viewLifecycleOwner) {
             Glide.with(this@HomeFragment)
                 .load(it.strMealThumb)
                 .into(binding.imgRandomMeal)

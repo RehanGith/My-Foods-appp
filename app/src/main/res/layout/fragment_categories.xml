@@ -6,13 +6,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context=".CategoriesFragment">
+        tools:context=".Screens.CategoriesFragment">
 
         <!-- TODO: Update blank fragment layout -->
-        <TextView
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/favorite_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/category" />
+            android:layout_height="match_parent" />
 
     </FrameLayout>
 </layout>

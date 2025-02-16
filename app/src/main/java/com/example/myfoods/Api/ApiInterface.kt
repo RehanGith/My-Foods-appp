@@ -13,7 +13,7 @@ interface ApiInterface {
     @GET("random.php")
     fun getRandomMeal(): Call<RandomMeal>
     @GET("lookup.php?")
-    fun getMealDetails(@Query("i") id:String): Call<Meal>
+    fun getMealDetails(@Query("i") id:String): Call<RandomMeal>
     @GET("filter.php?")
     fun getCategoryMeals(@Query("c") category:String): Call<PopularMeal>
 }

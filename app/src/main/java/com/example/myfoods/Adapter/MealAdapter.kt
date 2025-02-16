@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myfoods.Model.Meal
 import com.example.myfoods.R
+import com.example.myfoods.databinding.MostPopularCardBinding
 import com.example.myfoods.databinding.SingleMealCardBinding
 
 class MealAdapter(private val listener: OnItemViewClick): RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
-    class MealViewHolder(binding :SingleMealCardBinding ) : RecyclerView.ViewHolder(binding.root) {
-        val mealName = binding.tvMealName
-        val mealImage = binding.imgMeal
+    class MealViewHolder(binding: MostPopularCardBinding ) : RecyclerView.ViewHolder(binding.root) {
+        val mealImage = binding.imgPopularMeal
     }
 
     interface OnItemViewClick {
@@ -21,7 +21,7 @@ class MealAdapter(private val listener: OnItemViewClick): RecyclerView.Adapter<M
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealViewHolder {
-        return MealViewHolder(SingleMealCardBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return MealViewHolder(MostPopularCardBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
     private val differCallBack =object : DiffUtil.ItemCallback<Meal>() {
         override fun areItemsTheSame(oldItem: Meal, newItem: Meal): Boolean {
@@ -41,7 +41,6 @@ class MealAdapter(private val listener: OnItemViewClick): RecyclerView.Adapter<M
 
     override fun onBindViewHolder(holder: MealViewHolder, position: Int) {
         val meal = differ.currentList[position]
-        holder.mealName.text = meal.strMeal ?: "Unknown"
         holder.itemView.apply {
             Glide.with(this).load(meal.strMealThumb ?: R.drawable.ic_launcher_foreground)
                 .into(holder.mealImage)

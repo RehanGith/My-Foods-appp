@@ -8,7 +8,7 @@ import retrofit2.http.GET
 
 interface ApiInterface {
     @GET("random.php")
-    suspend fun getRandomMeal(): Call<RandomMeal>
+    fun getRandomMeal(): Call<RandomMeal>
 }
 
 

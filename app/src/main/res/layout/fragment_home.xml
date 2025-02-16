@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activites.MainActivity"
+    tools:context=".Screens.HomeFragment"
     android:id="@+id/root_home">
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/loading_gif"
@@ -96,6 +96,7 @@
                         android:id="@+id/img_random_meal"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:contentDescription="@string/random_meal"
                         android:scaleType="centerCrop"
                         android:src="@drawable/mealtest" />
                 </androidx.cardview.widget.CardView>

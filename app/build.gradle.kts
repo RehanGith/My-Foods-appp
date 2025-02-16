@@ -43,8 +43,14 @@ dependencies {
     //ssp and sdp libraries
     implementation(libs.intuit.sdp)
     implementation(libs.intuit.ssp)
+    //retrofits
+    implementation(libs.android.retrofit.json)
+    implementation(libs.android.retrofit2)
+    implementation(libs.android.logging.interceptor)
     //gif library
     implementation(libs.pl.droidsonroids.gif)
+    //glide github
+    implementation(libs.github.glide)
     //navigation libraries
     implementation(libs.androidx.navigation.ui)
     implementation(libs.androidx.navigation.fragment)

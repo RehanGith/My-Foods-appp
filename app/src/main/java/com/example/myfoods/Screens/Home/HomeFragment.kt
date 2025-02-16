@@ -8,8 +8,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
+import com.example.myfoods.Adapter.CategoryAdapter
 import com.example.myfoods.Adapter.MealAdapter
 import com.example.myfoods.Api.RetrofitsInstance.Companion.api
+import com.example.myfoods.Model.Category
 import com.example.myfoods.Model.Meal
 import com.example.myfoods.Model.RandomMeal
 import com.example.myfoods.R
@@ -19,10 +21,11 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewClick {
+class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewClick, CategoryAdapter.OnCategoryClickListener {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
     private lateinit var mealAdapter: MealAdapter
+    private lateinit var categoryAdapter: CategoryAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
@@ -36,7 +39,9 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
         //loading random meal and displaying it
         viewModel.loadRandomMeal()
         viewModel.loadPopularFoods("Seafood")
+        viewModel.loadCategories()
         setUpRecyclerView()
+        setUpCategoryRecyclerView()
         //observing random meal and displaying it
         viewModel.randomMeal.observe(viewLifecycleOwner) {
             Glide.with(this@HomeFragment)
@@ -76,5 +81,20 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
             }
             setHasFixedSize(true)
         }
+    }
+    private fun setUpCategoryRecyclerView() {
+        categoryAdapter = CategoryAdapter(this)
+        binding.categoryRecyclerView.apply {
+            adapter = categoryAdapter
+            layoutManager = GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false)
+            viewModel.categories.observe(viewLifecycleOwner) {
+                (adapter as CategoryAdapter).differ.submitList(it)
+            }
+            setHasFixedSize(true)
+        }
+    }
+
+    override fun onCategoryClick(category: Category) {
+
     }
 }

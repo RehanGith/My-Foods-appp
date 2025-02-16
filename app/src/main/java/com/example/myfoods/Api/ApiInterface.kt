@@ -2,6 +2,7 @@ package com.example.myfoods.Api
 
 
 import androidx.lifecycle.LiveData
+import com.example.myfoods.Model.CategoryMeal
 import com.example.myfoods.Model.Meal
 import com.example.myfoods.Model.PopularMeal
 import com.example.myfoods.Model.RandomMeal
@@ -16,6 +17,9 @@ interface ApiInterface {
     fun getMealDetails(@Query("i") id:String): Call<RandomMeal>
     @GET("filter.php?")
     fun getCategoryMeals(@Query("c") category:String): Call<PopularMeal>
+
+    @GET("categories.php")
+    fun getCategories(): Call<CategoryMeal>
 }
 
 

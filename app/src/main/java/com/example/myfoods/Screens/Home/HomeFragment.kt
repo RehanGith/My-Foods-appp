@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.myfoods.Api.RetrofitsInstance.Companion.api
@@ -17,34 +18,26 @@ import retrofit2.Response
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
-    lateinit var binding: FragmentHomeBinding
-    var randomMeal: Meal? = null // Change to nullable
+    private lateinit var binding: FragmentHomeBinding
+    private lateinit var viewModel: HomeViewModel
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
 
-        api.getRandomMeal().enqueue(object : Callback<RandomMeal> {
-            override fun onResponse(call: Call<RandomMeal>, response: Response<RandomMeal>) {
-                if (response.body() != null) {
-                    randomMeal = response.body()!!.meals[0]
-                    Log.d("TEST", "meal id ${randomMeal?.idMeal} name ${randomMeal?.strMeal}")
-                    Glide.with(this@HomeFragment)
-                        .load(randomMeal?.strMealThumb ?: R.drawable.ic_launcher_foreground)
-                        .into(binding.imgRandomMeal)
-                } else {
-                    return
-                }
-            }
-
-            override fun onFailure(call: Call<RandomMeal>, t: Throwable) {
-                Log.d("TEST", t.message.toString())
-            }
-        })
+        //loading random meal and displaying it
+        viewModel.loadRandomMeal()
+        observeRandomMeal()
 
         binding.imgRandomMeal.setOnClickListener {
-            randomMeal?.let { meal ->
-                onMealClick(meal)
+            viewModel.randomMeal.let { meal ->
+                meal.value?.let { it1 -> onMealClick(it1) }
             }
         }
     }
@@ -54,5 +47,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             putSerializable("meal", rMeal)
         }
         findNavController().navigate(R.id.action_homeFragment_to_mealDetail, bundle)
+    }
+    private fun observeRandomMeal() {
+        viewModel.randomMeal.observe(viewLifecycleOwner) { it ->
+            Glide.with(this@HomeFragment)
+                .load(it.strMealThumb)
+                .into(binding.imgRandomMeal)
+        }
     }
 }

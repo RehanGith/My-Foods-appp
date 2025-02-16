@@ -62,6 +62,8 @@ dependencies {
     //viewModel
     implementation(libs.androidx.lifecyle.viewmodel)
     //coroutines
+    implementation(libs.jetbrains.coroutine.core)
+    implementation(libs.jetbrains.coroutine.kotlinx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

@@ -16,6 +16,7 @@
         android:layout_height="120dp"
         android:layout_margin="15dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="@string/catagory_info"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.301"
@@ -24,6 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tvMealName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/img_meal"
@@ -31,6 +33,6 @@
         app:layout_constraintEnd_toEndOf="@id/img_meal"
         android:layout_marginTop="7dp"
         android:textColor="@color/black"
-        android:text="Beef"/>
+        android:text="@string/beef"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -17,8 +17,10 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentView) as NavHostFragment
+
+        // Set up the BottomNavigationView with the NavController
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.frag_host) as NavHostFragment
         val navController = navHostFragment.navController
-        NavigationUI.setupWithNavController(binding.bottomNav, navController)
+        NavigationUI.setupWithNavController(binding.bottomNavigation, navController)
     }
 }

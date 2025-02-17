@@ -19,7 +19,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), FavAdapter.OnFa
     private lateinit var binding: FragmentFavoritesBinding
     private lateinit var viewModel: FavoritesViewModel
     private lateinit var viewModelFactory: FavViewModelFactory
-    private lateinit var adapter: FavAdapter
+    private lateinit var favAdapter: FavAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,7 +30,8 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), FavAdapter.OnFa
         viewModel.getFavorites().observe(viewLifecycleOwner) {
             if(it != null) {
                 Log.d("Favorites", "Favorites: ${it.size}")
-                adapter.differ.submitList(it)
+                favAdapter.differ.submitList(it)
+                Log.d("Favorites", "Favorites: ${favAdapter.differ.currentList.size}")
                 binding.tvFavEmpty.visibility = View.INVISIBLE
             }else {
                 Log.d("Favorites", "Favorites: Empty")
@@ -39,9 +40,9 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), FavAdapter.OnFa
         }
     }
     private fun setUpRecyclerView() {
-        adapter = FavAdapter(this)
+        favAdapter = FavAdapter(this)
         binding.favRecView.apply {
-            adapter = adapter
+            adapter = favAdapter
             layoutManager  = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
             setHasFixedSize(true)
         }

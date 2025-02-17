@@ -46,15 +46,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
         viewModel.loadPopularFoods("Seafood")
         viewModel.loadCategories()
         setUpCategoryRecyclerView()
-        viewModel.categories.observe(viewLifecycleOwner) {
-            Log.d("HomeFragment", "Categories loaded: ${it.size}")
-            categoryAdapter.differ.submitList(it)
-            Log.d("HomeFragment", "CategoryAdapter item count: ${categoryAdapter.itemCount}")
-        }
         setUpRecyclerView()
-        viewModel.popularItems.observe(viewLifecycleOwner) {
-            mealAdapter.differ.submitList(it)
-        }
         //observing random meal and displaying it
         viewModel.randomMeal.observe(viewLifecycleOwner) {
             Glide.with(this@HomeFragment)
@@ -71,6 +63,19 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
                 onMealClick(meals[0])
             }
         }
+        viewModel.categories.observe(viewLifecycleOwner) {
+            Log.d("HomeFragment", "Categories loaded: ${it.size}")
+            categoryAdapter.differ.submitList(it)
+            Log.d("HomeFragment", "CategoryAdapter item count: ${categoryAdapter.itemCount}")
+            binding.categoryCard.post {
+                binding.categoryCard.requestLayout()
+                binding.root.requestLayout()
+            }
+        }
+        viewModel.popularItems.observe(viewLifecycleOwner) {
+            mealAdapter.differ.submitList(it)
+        }
+
 
     }
     //navigate to meal detail fragment
@@ -83,7 +88,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
 
     //on any item click in recycler view except random meal
     override fun onItemClick(meal: MealX) {
-        Log.d("Test HomeFragment", "onItemClick: ${meal.idMeal}")
         meal.idMeal.let { viewModel.loadMealById(it) }
 
     }
@@ -94,6 +98,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
             adapter = mealAdapter
             layoutManager = GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false)
             setHasFixedSize(true)
+
         }
     }
     private fun setUpCategoryRecyclerView() {

@@ -15,7 +15,7 @@ import retrofit2.Response
 
 class ViewModelForCategories: ViewModel() {
     private val repo = MealRepo()
-    var _categories=  MutableLiveData<List<Category>>()
+    private var _categories=  MutableLiveData<List<Category>>()
     val categories: LiveData<List<Category>>
         get() = _categories
 

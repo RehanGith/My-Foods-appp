@@ -15,4 +15,5 @@
     <string name="catagory_info">%1$s%2$s</string>
     <string name="beef">Beef</string>
     <string name="tvCategoryName">%1$s  :%2$s</string>
+    <string name="no_favorites">No Favorites...</string>
 </resources>

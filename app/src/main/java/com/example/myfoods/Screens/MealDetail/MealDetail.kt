@@ -43,10 +43,7 @@ class MealDetail : Fragment(R.layout.activity_meal_detailes) {
         super.onViewCreated(view, savedInstanceState)
         binding = ActivityMealDetailesBinding.bind(view)
         showLoading()
-        viewModel.mealDB.observe(viewLifecycleOwner) {
-            setTextsInViews(it)
-            stopLoading()
-        }
+        checkIfStopLoading()
         binding.imgYoutube.setOnClickListener {
             val intent =
                 Intent(Intent.ACTION_VIEW, Uri.parse(viewModel.mealDB.value?.mealYoutubeLink))
@@ -57,6 +54,12 @@ class MealDetail : Fragment(R.layout.activity_meal_detailes) {
             binding.btnSave.resources.getDrawable(R.drawable.ic_saved)
             viewModel.saveMeal()
         }
+    }
+    private fun checkIfStopLoading() {
+        viewModel.mealDB.observe(viewLifecycleOwner) {
+            setTextsInViews(it)
+        }
+        stopLoading()
     }
 
     private fun setTextsInViews(meal: MealDB) {

@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/_25sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Screens.Favorites.FavoritesFragment">
 
@@ -11,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textColor="@color/accent"
-        android:text="No Favorites... "
+        android:text="@string/no_favorites"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

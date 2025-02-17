@@ -18,7 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeViewModel: ViewModel() {
+class HomeViewModel : ViewModel() {
 
     private var repository: MealRepo = MealRepo()
     private var _randomMeal = MutableLiveData<Meal>()
@@ -46,25 +46,29 @@ class HomeViewModel: ViewModel() {
                     return
                 }
             }
+
             override fun onFailure(call: Call<RandomMeal>, t: Throwable) {
                 Log.d("TEST", t.message.toString())
             }
         })
     }
+
     //fun for loading category meals by category id
-    fun loadPopularFoods(category : String)  {
-        repository.searchMealsByCategory(category).enqueue(object  : Callback<PopularMeal> {
+    fun loadPopularFoods(category: String) {
+        repository.searchMealsByCategory(category).enqueue(object : Callback<PopularMeal> {
             override fun onResponse(p0: Call<PopularMeal>, response: Response<PopularMeal>) {
-                if(response.body() != null) {
-                    val xMeal : List<MealX> = response.body()!!.meals
+                if (response.body() != null) {
+                    val xMeal: List<MealX> = response.body()!!.meals
                     _popularItems.value = xMeal
                 }
             }
+
             override fun onFailure(p0: Call<PopularMeal>, p1: Throwable) {
                 Log.d("TEST", p1.message.toString())
             }
         })
     }
+
     //for load by the meal id
     fun loadMealById(id: String) {
         repository.getMealDetails(id).enqueue(object : Callback<RandomMeal> {
@@ -80,10 +84,11 @@ class HomeViewModel: ViewModel() {
             }
         })
     }
+
     fun loadCategories() {
-        repository.getCategories().enqueue(object :  Callback<CategoryMeal> {
+        repository.getCategories().enqueue(object : Callback<CategoryMeal> {
             override fun onResponse(p0: Call<CategoryMeal>, response: Response<CategoryMeal>) {
-                if(response.body() != null) {
+                if (response.body() != null) {
                     _categories.value = response.body()!!.categories
                     Log.d("TEST category", "meal id ${_categories.value}")
                 }

@@ -13,6 +13,7 @@ import com.example.myfoods.Adapter.MealAdapter
 import com.example.myfoods.Api.RetrofitsInstance.Companion.api
 import com.example.myfoods.Model.Category
 import com.example.myfoods.Model.Meal
+import com.example.myfoods.Model.MealX
 import com.example.myfoods.Model.RandomMeal
 import com.example.myfoods.R
 import com.example.myfoods.databinding.FragmentHomeBinding
@@ -65,9 +66,9 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
     }
 
     //on any item click in recycler view except random meal
-    override fun onItemClick(meal: Meal) {
+    override fun onItemClick(meal: MealX) {
         Log.d("Test HomeFragment", "onItemClick: ${meal.idMeal}")
-        meal.idMeal?.let { viewModel.loadMealById(it) }
+        meal.idMeal.let { viewModel.loadMealById(it) }
         viewModel.mealById.observe(viewLifecycleOwner) {
             onMealClick(it[0])
         }

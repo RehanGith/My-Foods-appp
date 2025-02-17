@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myfoods.Model.Meal
+import com.example.myfoods.Model.MealX
 import com.example.myfoods.R
 import com.example.myfoods.databinding.MostPopularCardBinding
 import com.example.myfoods.databinding.SingleMealCardBinding
@@ -17,18 +18,19 @@ class MealAdapter(private val listener: OnItemViewClick): RecyclerView.Adapter<M
     }
 
     interface OnItemViewClick {
-        fun onItemClick(meal: Meal)
+        fun onItemClick(meal: MealX)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealViewHolder {
         return MealViewHolder(MostPopularCardBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
-    private val differCallBack =object : DiffUtil.ItemCallback<Meal>() {
-        override fun areItemsTheSame(oldItem: Meal, newItem: Meal): Boolean {
-            return oldItem.strSource == newItem.strSource
+    private val differCallBack =object : DiffUtil.ItemCallback<MealX>() {
+
+        override fun areItemsTheSame(oldItem: MealX, newItem: MealX): Boolean {
+            return oldItem.idMeal == newItem.idMeal
         }
 
-        override fun areContentsTheSame(oldItem: Meal, newItem: Meal): Boolean {
+        override fun areContentsTheSame(oldItem: MealX, newItem: MealX): Boolean {
             return oldItem == newItem
         }
 

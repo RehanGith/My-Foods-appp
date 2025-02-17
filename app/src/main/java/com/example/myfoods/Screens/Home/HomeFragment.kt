@@ -66,7 +66,11 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
                 onMealClick(it)
             }
         }
-
+        viewModel.mealById.observe(viewLifecycleOwner) {meals ->
+            if(!meals.isNullOrEmpty()) {
+                onMealClick(meals[0])
+            }
+        }
 
     }
     //navigate to meal detail fragment
@@ -81,10 +85,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
     override fun onItemClick(meal: MealX) {
         Log.d("Test HomeFragment", "onItemClick: ${meal.idMeal}")
         meal.idMeal.let { viewModel.loadMealById(it) }
-        Log.d("Test HomeFragment", "onItemClick: ${meal.idMeal}")
-        viewModel.mealById.observe(viewLifecycleOwner) {
-            onMealClick(it[0])
-        }
+
     }
 
     private fun setUpRecyclerView() {

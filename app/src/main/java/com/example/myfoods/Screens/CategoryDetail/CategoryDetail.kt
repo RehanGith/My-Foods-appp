@@ -15,7 +15,8 @@ import com.example.myfoods.R
 import com.example.myfoods.Util.Constants
 import com.example.myfoods.databinding.ActivityCategoriesBinding
 
-class CategoryDetail : Fragment(R.layout.activity_categories), MealAdapter.OnItemViewClick {
+class
+CategoryDetail : Fragment(R.layout.activity_categories), MealAdapter.OnItemViewClick {
     private lateinit var binding: ActivityCategoriesBinding
     private lateinit var viewModel: CategoryViewModel
     private lateinit var viewModeFactory: CategoryViewModelFactory

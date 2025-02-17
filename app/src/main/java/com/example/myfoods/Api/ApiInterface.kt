@@ -20,6 +20,8 @@ interface ApiInterface {
 
     @GET("categories.php")
     fun getCategories(): Call<CategoryMeal>
+    @GET("search.php?")
+    fun searchMeals(@Query("s") searchQuery:String): Call<RandomMeal>
 }
 
 

@@ -9,5 +9,5 @@ class MealRepo() {
     fun getMealDetails(id:String) = RetrofitsInstance.api.getMealDetails(id)
     fun searchMealsByCategory(category :String) = RetrofitsInstance.api.getCategoryMeals(category)
     fun getCategories() = RetrofitsInstance.api.getCategories()
-
+    fun searchMealsByName(name:String) = RetrofitsInstance.api.searchMeals(name)
 }

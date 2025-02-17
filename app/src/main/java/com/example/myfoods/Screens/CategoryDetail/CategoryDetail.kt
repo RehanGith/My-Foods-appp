@@ -15,8 +15,7 @@ import com.example.myfoods.R
 import com.example.myfoods.Util.Constants
 import com.example.myfoods.databinding.ActivityCategoriesBinding
 
-class
-CategoryDetail : Fragment(R.layout.activity_categories), MealAdapter.OnItemViewClick {
+class CategoryDetail : Fragment(R.layout.activity_categories), MealAdapter.OnItemViewClick {
     private lateinit var binding: ActivityCategoriesBinding
     private lateinit var viewModel: CategoryViewModel
     private lateinit var viewModeFactory: CategoryViewModelFactory
@@ -46,7 +45,6 @@ CategoryDetail : Fragment(R.layout.activity_categories), MealAdapter.OnItemViewC
         viewModel.mealById.observe(viewLifecycleOwner) { meals ->
             if (!meals.isNullOrEmpty()) { // Handle empty case safely
                 val meal = meals[0]
-                Log.d("MY Test cate 0", "onItemClick: ${meal.idMeal}")
                 val bundle = Bundle().apply {
                     putSerializable(Constants.MEAL_NAV, meal) // Pass the Meal object (not the list)
                 }
@@ -68,7 +66,6 @@ CategoryDetail : Fragment(R.layout.activity_categories), MealAdapter.OnItemViewC
     }
 
     override fun onItemClick(meal: MealX) {
-        Log.d("MY Test cate", "onItemClick: ${meal.idMeal}")
         meal.idMeal.let { viewModel.loadMealById(it) }
     }
 

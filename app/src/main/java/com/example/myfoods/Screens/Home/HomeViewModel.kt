@@ -43,7 +43,6 @@ class HomeViewModel : ViewModel() {
             override fun onResponse(call: Call<RandomMeal>, response: Response<RandomMeal>) {
                 if (response.body() != null) {
                     val rMeal = response.body()!!.meals[0]
-                    Log.d("TEST", "meal id ${rMeal.idMeal} name ${rMeal.strMeal}")
                     _randomMeal.value = rMeal
                 } else {
                     return
@@ -106,6 +105,7 @@ class HomeViewModel : ViewModel() {
     }
 
 }
+
 class SingleLiveEvent<T> : MutableLiveData<T>() {
     private val pending = AtomicBoolean(false)
 

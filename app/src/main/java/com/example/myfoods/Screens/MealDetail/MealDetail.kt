@@ -31,9 +31,6 @@ class MealDetail : Fragment(R.layout.activity_meal_detailes) {
     ): View? {
         val meal = arguments?.getSerializable(Constants.MEAL_NAV) as Meal?
         if (meal != null) {
-            Log.d("My Test cat 2", "onCreateView: ${meal.idMeal}")
-        }
-        if (meal != null) {
             viewModelFactory= DetailViewModelFactory(meal, requireActivity().application)
             viewModel = ViewModelProvider(this , viewModelFactory)[DetailViewModel::class.java]
         } else {

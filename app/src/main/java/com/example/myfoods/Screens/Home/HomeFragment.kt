@@ -27,6 +27,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
     private lateinit var viewModel: HomeViewModel
     private lateinit var mealAdapter: MealAdapter
     private lateinit var categoryAdapter: CategoryAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
@@ -41,8 +42,16 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
         viewModel.loadRandomMeal()
         viewModel.loadPopularFoods("Seafood")
         viewModel.loadCategories()
-        setUpRecyclerView()
         setUpCategoryRecyclerView()
+        viewModel.categories.observe(viewLifecycleOwner) {
+            Log.d("HomeFragment", "Categories loaded: ${it.size}")
+            categoryAdapter.differ.submitList(it)
+            Log.d("HomeFragment", "CategoryAdapter item count: ${categoryAdapter.itemCount}")
+        }
+        setUpRecyclerView()
+        viewModel.popularItems.observe(viewLifecycleOwner) {
+            mealAdapter.differ.submitList(it)
+        }
         //observing random meal and displaying it
         viewModel.randomMeal.observe(viewLifecycleOwner) {
             Glide.with(this@HomeFragment)
@@ -75,13 +84,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
     }
 
     private fun setUpRecyclerView() {
-        mealAdapter = MealAdapter(this)
+        mealAdapter = MealAdapter(this, MealAdapter.MOST_POPULAR_VIEW_TYPE)
         binding.recViewMealsPopular.apply {
             adapter = mealAdapter
             layoutManager = GridLayoutManager(context, 1, GridLayoutManager.HORIZONTAL, false)
-            viewModel.popularItems.observe(viewLifecycleOwner) {
-                (adapter as MealAdapter).differ.submitList(it)
-            }
             setHasFixedSize(true)
         }
     }
@@ -90,9 +96,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
         binding.categoryRecyclerView.apply {
             adapter = categoryAdapter
             layoutManager = GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false)
-            viewModel.categories.observe(viewLifecycleOwner) {
-                (adapter as CategoryAdapter).differ.submitList(it)
-            }
             setHasFixedSize(true)
         }
     }

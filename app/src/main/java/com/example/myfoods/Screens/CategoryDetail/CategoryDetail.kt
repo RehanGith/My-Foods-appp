@@ -50,7 +50,7 @@ class CategoryDetail : Fragment(R.layout.activity_categories), MealAdapter.OnIte
 
     }
     private fun initAdapter() {
-        mealAdapter = MealAdapter(this)
+        mealAdapter = MealAdapter(this, MealAdapter.SINGLE_MEAL_VIEW_TYPE)
         binding.mealRecyclerview.apply {
             adapter = mealAdapter
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)

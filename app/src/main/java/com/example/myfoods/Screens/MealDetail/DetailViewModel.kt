@@ -19,10 +19,10 @@ class DetailViewModel(myMeal : Meal, app : Application) : AndroidViewModel(app) 
     lateinit var meal: Meal
 
     init {
-        Log.i("DetailViewModel", "DetailViewModel ${myMeal.idMeal}")
+        Log.i("My Test cate 3", "DetailViewModel ${myMeal.idMeal}")
         _meal.value = myMeal
         _mealDB.value = convertMeal()
-        Log.i("DetailViewModel", "DetailViewModel ${_mealDB.value}")
+        Log.i("MY Test cate 4", "DetailViewModel ${_mealDB.value!!.mealId}")
     }
     val mealDB : LiveData<MealDB>
         get() = _mealDB

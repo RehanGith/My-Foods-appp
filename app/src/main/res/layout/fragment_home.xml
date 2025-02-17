@@ -50,7 +50,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/myfont"
-                        android:text="Home"
+                        android:text="@string/home"
                         android:textColor="@color/accent"
                         android:textSize="25sp"
                         android:textStyle="bold" />
@@ -72,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/myfont"
-                    android:text="What would you like to eat"
+                    android:text="@string/what_would_you_like_to_eat"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -98,8 +98,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:contentDescription="@string/random_meal"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/mealtest" />
+                        android:scaleType="centerCrop" />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
@@ -108,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
                     android:fontFamily="@font/myfont"
-                    android:text="over popular items"
+                    android:text="@string/our_populer_foods"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -130,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/myfont"
-                    android:text="category"
+                    android:text="@string/category"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -155,8 +154,10 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/category_recycler_view"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:scrollbars="none" />
+
+
                 </androidx.cardview.widget.CardView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

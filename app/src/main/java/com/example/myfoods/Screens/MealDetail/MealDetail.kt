@@ -1,8 +1,10 @@
 package com.example.myfoods.Screens.MealDetail
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +31,9 @@ class MealDetail : Fragment(R.layout.activity_meal_detailes) {
     ): View? {
         val meal = arguments?.getSerializable(Constants.MEAL_NAV) as Meal?
         if (meal != null) {
+            Log.d("My Test cat 2", "onCreateView: ${meal.idMeal}")
+        }
+        if (meal != null) {
             viewModelFactory= DetailViewModelFactory(meal, requireActivity().application)
             viewModel = ViewModelProvider(this , viewModelFactory)[DetailViewModel::class.java]
         } else {
@@ -36,6 +41,7 @@ class MealDetail : Fragment(R.layout.activity_meal_detailes) {
         }
         return super.onCreateView(inflater, container, savedInstanceState)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = ActivityMealDetailesBinding.bind(view)
@@ -51,6 +57,7 @@ class MealDetail : Fragment(R.layout.activity_meal_detailes) {
         }
 
         binding.btnSave.setOnClickListener {
+            binding.btnSave.resources.getDrawable(R.drawable.ic_saved)
             viewModel.saveMeal()
         }
     }

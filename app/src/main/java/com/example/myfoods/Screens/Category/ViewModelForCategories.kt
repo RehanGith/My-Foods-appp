@@ -24,7 +24,6 @@ class ViewModelForCategories: ViewModel() {
             override fun onResponse(p0: Call<CategoryMeal>, response: Response<CategoryMeal>) {
                 if (response.body() != null) {
                     _categories.value = response.body()!!.categories
-                    Log.d("TEST category", "meal id ${_categories.value}")
                 }
             }
 

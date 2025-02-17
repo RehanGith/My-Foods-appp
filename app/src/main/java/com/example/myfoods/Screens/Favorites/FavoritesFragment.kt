@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myfoods.Adapter.FavAdapter
+import com.example.myfoods.Model.Meal
 import com.example.myfoods.Model.MealDB
 import com.example.myfoods.R
+import com.example.myfoods.Util.Constants
 import com.example.myfoods.databinding.FragmentFavoritesBinding
 import com.example.myfoods.databinding.MealCardBinding
 
@@ -29,12 +32,9 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), FavAdapter.OnFa
         setUpRecyclerView()
         viewModel.getFavorites().observe(viewLifecycleOwner) {
             if(it != null) {
-                Log.d("Favorites", "Favorites: ${it.size}")
                 favAdapter.differ.submitList(it)
-                Log.d("Favorites", "Favorites: ${favAdapter.differ.currentList.size}")
                 binding.tvFavEmpty.visibility = View.INVISIBLE
             }else {
-                Log.d("Favorites", "Favorites: Empty")
                 binding.tvFavEmpty.visibility = View.VISIBLE
             }
         }
@@ -47,8 +47,70 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), FavAdapter.OnFa
             setHasFixedSize(true)
         }
     }
+    private fun convertMealDBToMeal(mealDB: MealDB): Meal {
+        return Meal(
+            dateModified = null,
+            idMeal = mealDB.mealId.toString(),
+            strArea = mealDB.mealCountry,
+            strCategory = mealDB.mealCategory,
+            strCreativeCommonsConfirmed = null,
+            strDrinkAlternate = null,
+            strImageSource = null,
+            strIngredient1 = null,
+            strIngredient2 = null,
+            strIngredient3 = null,
+            strIngredient4 = null,
+            strIngredient5 = null,
+            strIngredient6 = null,
+            strIngredient7 = null,
+            strIngredient8 = null,
+            strIngredient9 = null,
+            strIngredient10 = null,
+            strIngredient11 = null,
+            strIngredient12 = null,
+            strIngredient13 = null,
+            strIngredient14 = null,
+            strIngredient15 = null,
+            strIngredient16 = null,
+            strIngredient17 = null,
+            strIngredient18 = null,
+            strIngredient19 = null,
+            strIngredient20 = null,
+            strInstructions = mealDB.mealInstruction,
+            strMeal = mealDB.mealName,
+            strMealThumb = mealDB.mealThumb,
+            strMeasure1 = null,
+            strMeasure2 = null,
+            strMeasure3 = null,
+            strMeasure4 = null,
+            strMeasure5 = null,
+            strMeasure6 = null,
+            strMeasure7 = null,
+            strMeasure8 = null,
+            strMeasure9 = null,
+            strMeasure10 = null,
+            strMeasure11 = null,
+            strMeasure12 = null,
+            strMeasure13 = null,
+            strMeasure14 = null,
+            strMeasure15 = null,
+            strMeasure16 = null,
+            strMeasure17 = null,
+            strMeasure18 = null,
+            strMeasure19 = null,
+            strMeasure20 = null,
+            strSource = null,
+            strTags = null,
+            strYoutube = mealDB.mealYoutubeLink
+        )
+    }
+
 
     override fun onFavClick(meal: MealDB) {
-
+        val convertedMeal = convertMealDBToMeal(meal)
+        val bundle = Bundle().apply {
+            putSerializable(Constants.MEAL_NAV, convertedMeal)
+        }
+        findNavController().navigate(R.id.action_favoritesFragment_to_mealDetail, bundle)
     }
 }

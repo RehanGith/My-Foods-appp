@@ -21,7 +21,9 @@ import com.example.myfoods.databinding.FragmentHomeBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 
 class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewClick, CategoryAdapter.OnCategoryClickListener {
     private lateinit var binding: FragmentHomeBinding
@@ -79,6 +81,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
     override fun onItemClick(meal: MealX) {
         Log.d("Test HomeFragment", "onItemClick: ${meal.idMeal}")
         meal.idMeal.let { viewModel.loadMealById(it) }
+        Log.d("Test HomeFragment", "onItemClick: ${meal.idMeal}")
         viewModel.mealById.observe(viewLifecycleOwner) {
             onMealClick(it[0])
         }

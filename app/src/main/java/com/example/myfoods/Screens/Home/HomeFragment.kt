@@ -63,6 +63,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
         }
         findNavController().navigate(R.id.action_homeFragment_to_mealDetail, bundle)
     }
+
     //on any item click in recycler view except random meal
     override fun onItemClick(meal: Meal) {
         Log.d("Test HomeFragment", "onItemClick: ${meal.idMeal}")
@@ -71,6 +72,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
             onMealClick(it[0])
         }
     }
+
     private fun setUpRecyclerView() {
         mealAdapter = MealAdapter(this)
         binding.recViewMealsPopular.apply {
@@ -95,6 +97,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
     }
 
     override fun onCategoryClick(category: Category) {
-
+        Log.d("Test HomeFragment", "onCategoryClick: ${category.strCategory}")
+        val bundle = Bundle().apply {
+            putString("categoryName", category.strCategory)
+        }
+        findNavController().navigate(R.id.action_homeFragment_to_categoryDetail, bundle)
     }
 }

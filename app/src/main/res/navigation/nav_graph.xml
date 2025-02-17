@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_mealDetail"
             app:destination="@id/mealDetail" />
+        <action
+            android:id="@+id/action_homeFragment_to_categoryDetail"
+            app:destination="@id/categoryDetail" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
@@ -41,6 +44,15 @@
             android:name="meal"
             app:argType="com.example.myfoods.Model.Meal"
         />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryDetail"
+        android:name="com.example.myfoods.Screens.CategoryDetail.CategoryDetail"
+        android:label="fragment_category_detail"
+        tools:layout="@layout/fragment_category_detail">
+        <argument
+            android:name="stringArg"
+            app:argType="string" />
     </fragment>
 
 

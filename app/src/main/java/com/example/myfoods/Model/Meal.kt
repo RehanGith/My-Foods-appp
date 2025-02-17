@@ -1,10 +1,13 @@
 package com.example.myfoods.Model
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
 @Entity
 data class Meal(
+    @PrimaryKey(autoGenerate = true)
+    var id: Int? = null,
     val dateModified: Any? = null,
     val idMeal: String? = null,
     val strArea: String? = null,

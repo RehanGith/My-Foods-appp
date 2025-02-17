@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -31,6 +32,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
     private lateinit var mealAdapter: MealAdapter
     private lateinit var categoryAdapter: CategoryAdapter
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
@@ -40,19 +42,17 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
+        showLoadingCase()
 
         //loading random meal and displaying it
         viewModel.loadRandomMeal()
         viewModel.loadPopularFoods("Seafood")
         viewModel.loadCategories()
+
         setUpCategoryRecyclerView()
         setUpRecyclerView()
+        observeData()
         //observing random meal and displaying it
-        viewModel.randomMeal.observe(viewLifecycleOwner) {
-            Glide.with(this@HomeFragment)
-                .load(it.strMealThumb)
-                .into(binding.imgRandomMeal)
-        }
         binding.imgRandomMeal.setOnClickListener {
             viewModel.randomMeal.observe(viewLifecycleOwner) {
                 onMealClick(it)
@@ -63,20 +63,43 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
                 onMealClick(meals[0])
             }
         }
+
+    }
+    private fun observeData() {
+        var isRandomMealLoaded = false
+        var isPopularItemsLoaded = false
+        var isCategoriesLoaded = false
+
+        viewModel.randomMeal.observe(viewLifecycleOwner) {
+            Glide.with(this@HomeFragment)
+                .load(it.strMealThumb)
+                .into(binding.imgRandomMeal)
+            isRandomMealLoaded = true
+            checkIfDataIsLoaded(isRandomMealLoaded, isPopularItemsLoaded, isCategoriesLoaded)
+        }
+
+        viewModel.popularItems.observe(viewLifecycleOwner) {
+            mealAdapter.differ.submitList(it)
+            isPopularItemsLoaded = true
+            checkIfDataIsLoaded(isRandomMealLoaded, isPopularItemsLoaded, isCategoriesLoaded)
+        }
+
         viewModel.categories.observe(viewLifecycleOwner) {
             Log.d("HomeFragment", "Categories loaded: ${it.size}")
             categoryAdapter.differ.submitList(it)
-            Log.d("HomeFragment", "CategoryAdapter item count: ${categoryAdapter.itemCount}")
             binding.categoryCard.post {
                 binding.categoryCard.requestLayout()
                 binding.root.requestLayout()
             }
+            isCategoriesLoaded = true
+            checkIfDataIsLoaded(isRandomMealLoaded, isPopularItemsLoaded, isCategoriesLoaded)
         }
-        viewModel.popularItems.observe(viewLifecycleOwner) {
-            mealAdapter.differ.submitList(it)
+    }
+
+    private fun checkIfDataIsLoaded(isRandomMealLoaded: Boolean, isPopularItemsLoaded: Boolean, isCategoriesLoaded: Boolean) {
+        if (isRandomMealLoaded && isPopularItemsLoaded && isCategoriesLoaded) {
+            cancelLoadingCase()
         }
-
-
     }
     //navigate to meal detail fragment
     private fun onMealClick(rMeal: Meal) {
@@ -116,5 +139,35 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
             putString(Constants.CATEGORY_NAV, category.strCategory)
         }
         findNavController().navigate(R.id.action_homeFragment_to_categoryDetail, bundle)
+    }
+    private fun showLoadingCase() {
+        binding.apply {
+            header.visibility = View.INVISIBLE
+
+            tvWouldLikeToEat.visibility = View.INVISIBLE
+            randomMeal.visibility = View.INVISIBLE
+            tvOverPupItems.visibility = View.INVISIBLE
+            recViewMealsPopular.visibility = View.INVISIBLE
+            tvCategory.visibility = View.INVISIBLE
+            categoryCard.visibility = View.INVISIBLE
+            loadingGif.visibility = View.VISIBLE
+            rootHome.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.g_loading))
+
+        }
+    }
+
+    private fun cancelLoadingCase() {
+        binding.apply {
+            header.visibility = View.VISIBLE
+            tvWouldLikeToEat.visibility = View.VISIBLE
+            randomMeal.visibility = View.VISIBLE
+            tvOverPupItems.visibility = View.VISIBLE
+            recViewMealsPopular.visibility = View.VISIBLE
+            tvCategory.visibility = View.VISIBLE
+            categoryCard.visibility = View.VISIBLE
+            loadingGif.visibility = View.INVISIBLE
+            rootHome.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
+
+        }
     }
 }

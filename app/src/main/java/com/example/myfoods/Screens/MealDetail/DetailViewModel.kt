@@ -28,7 +28,7 @@ class DetailViewModel(myMeal : Meal, app : Application) : AndroidViewModel(app) 
         get() = _mealDB
 
     private fun convertMeal(): MealDB {
-        // Get the current meal value; if it's null, return null immediatel
+        // Get the current meal value; if it's null, return null immediately
         if (_meal.value == null) {
             return MealDB(0, "", "", "", "", "", "")
         }else{

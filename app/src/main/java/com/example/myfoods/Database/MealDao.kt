@@ -16,12 +16,12 @@ interface MealDao {
     @Delete
     suspend fun deleteMeal(mael : MealDB)
 
-    @Query("SELECT * FROM Meal")
+    @Query("SELECT * FROM meal_information")
     fun getAllMeals(): LiveData<List<MealDB>>
-    @Query("SELECT * FROM Meal WHERE idMeal = :id")
+    @Query("SELECT * FROM meal_information WHERE mealId = :id")
     suspend fun getMealById(id: String): MealDB?
 
-    @Query("SELECT * FROM Meal WHERE idMeal = :id")
+    @Query("SELECT * FROM meal_information WHERE mealId = :id")
     suspend fun deleteById(id: String)
 
 

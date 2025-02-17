@@ -20,7 +20,7 @@ class CategoryDetail : Fragment(R.layout.activity_categories) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = ActivityCategoriesBinding.inflate(inflater, container, false)
+        binding = ActivityCategoriesBinding.inflate(inflater, container, false)
         val view = binding.root
         val str = arguments?.getString("categoryName") ?:  ""
         Log.d("Test str at Category", str)

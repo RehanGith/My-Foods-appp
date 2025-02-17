@@ -12,7 +12,6 @@ class DbRepo(private val db: MealDatabase) {
 
     fun getAllMeals() = db.getMealDao().getAllMeals()
 
-    suspend fun deleteById(id: String) = db.getMealDao().deleteById(id)
 
     suspend fun getById(id: String) = db.getMealDao().getMealById(id)
 }

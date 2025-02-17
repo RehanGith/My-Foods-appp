@@ -1,5 +1,7 @@
 package com.example.myfoods.Screens.MealDetail
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,7 +22,6 @@ class MealDetail : Fragment(R.layout.activity_meal_detailes) {
     private lateinit var binding: ActivityMealDetailesBinding
     private lateinit var viewModel: DetailViewModel
     private lateinit var viewModelFactory: DetailViewModelFactory
-    private var repo = DbRepo(MealDatabase(requireContext()))
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,6 +43,15 @@ class MealDetail : Fragment(R.layout.activity_meal_detailes) {
         viewModel.mealDB.observe(viewLifecycleOwner) {
             setTextsInViews(it)
             stopLoading()
+        }
+        binding.imgYoutube.setOnClickListener {
+            val intent =
+                Intent(Intent.ACTION_VIEW, Uri.parse(viewModel.mealDB.value?.mealYoutubeLink))
+            startActivity(intent)
+        }
+
+        binding.btnSave.setOnClickListener {
+            viewModel.saveMeal()
         }
     }
 
@@ -65,6 +75,7 @@ class MealDetail : Fragment(R.layout.activity_meal_detailes) {
 
         }
     }
+
 
     private fun showLoading() {
         binding.progressBar.visibility = View.VISIBLE

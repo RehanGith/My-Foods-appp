@@ -21,8 +21,7 @@ interface MealDao {
     @Query("SELECT * FROM meal_information WHERE mealId = :id")
     suspend fun getMealById(id: String): MealDB?
 
-    @Query("SELECT * FROM meal_information WHERE mealId = :id")
-    suspend fun deleteById(id: String)
+
 
 
 }

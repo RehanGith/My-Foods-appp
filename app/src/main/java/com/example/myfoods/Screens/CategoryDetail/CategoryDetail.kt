@@ -15,6 +15,7 @@ import com.example.myfoods.Model.Category
 import com.example.myfoods.Model.MealX
 import com.example.myfoods.R
 import com.example.myfoods.Screens.Home.HomeViewModel
+import com.example.myfoods.Util.Constants
 import com.example.myfoods.databinding.ActivityCategoriesBinding
 
 class CategoryDetail : Fragment(R.layout.activity_categories), MealAdapter.OnItemViewClick {
@@ -29,7 +30,7 @@ class CategoryDetail : Fragment(R.layout.activity_categories), MealAdapter.OnIte
     ): View {
         binding = ActivityCategoriesBinding.inflate(inflater, container, false)
         val view = binding.root
-        val str = arguments?.getString("categoryName") ?:  ""
+        val str = arguments?.getString(Constants.CATEGORY_NAV) ?:  ""
         Log.d("Test str at Category", str)
         viewModeFactory = CategoryViewModelFactory(str)
         viewModel = ViewModelProvider(this, viewModeFactory).get(CategoryViewModel::class.java)
@@ -66,7 +67,7 @@ class CategoryDetail : Fragment(R.layout.activity_categories), MealAdapter.OnIte
         meal.idMeal.let { viewModel.loadMealById(it) }
         viewModel.mealById.observe(viewLifecycleOwner) {
             val bundle = Bundle().apply {
-                putSerializable("meal", it[0])
+                putSerializable(Constants.MEAL_NAV, it[0])
             }
             findNavController().navigate(R.id.action_categoryDetail_to_mealDetail, bundle)
         }

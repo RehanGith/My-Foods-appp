@@ -16,6 +16,7 @@ import com.example.myfoods.Model.Meal
 import com.example.myfoods.Model.MealX
 import com.example.myfoods.Model.RandomMeal
 import com.example.myfoods.R
+import com.example.myfoods.Util.Constants
 import com.example.myfoods.databinding.FragmentHomeBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -69,7 +70,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
     //navigate to meal detail fragment
     private fun onMealClick(rMeal: Meal) {
         val bundle = Bundle().apply {
-            putSerializable("meal", rMeal)
+            putSerializable(Constants.MEAL_NAV, rMeal)
         }
         findNavController().navigate(R.id.action_homeFragment_to_mealDetail, bundle)
     }
@@ -103,7 +104,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
     override fun onCategoryClick(category: Category) {
         Log.d("Test HomeFragment", "onCategoryClick: ${category.strCategory}")
         val bundle = Bundle().apply {
-            putString("categoryName", category.strCategory)
+            putString(Constants.CATEGORY_NAV, category.strCategory)
         }
         findNavController().navigate(R.id.action_homeFragment_to_categoryDetail, bundle)
     }

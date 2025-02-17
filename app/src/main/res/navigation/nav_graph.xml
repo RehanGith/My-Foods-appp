@@ -32,8 +32,8 @@
         android:label="fragment_categories"
         tools:layout="@layout/fragment_categories" >
         <action
-            android:id="@+id/action_categoriesFragment_to_mealDetail"
-            app:destination="@id/mealDetail" />
+            android:id="@+id/action_categoriesFragment_to_categoryDetail"
+            app:destination="@id/categoryDetail" />
     </fragment>
     <fragment
         android:id="@+id/mealDetail"

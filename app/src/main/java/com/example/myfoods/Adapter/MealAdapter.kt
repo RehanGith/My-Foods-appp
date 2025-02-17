@@ -39,7 +39,7 @@ class MealAdapter(
             is MealViewBinding.SingleMealCard -> binding.binding.root
         }
     ) {
-        val mealImage: ImageView? = when (binding) {
+        val mealImage: ImageView = when (binding) {
             is MealViewBinding.MostPopularCard -> binding.binding.imgPopularMeal
             is MealViewBinding.SingleMealCard -> binding.binding.imgMeal
         }
@@ -85,7 +85,7 @@ class MealAdapter(
     override fun onBindViewHolder(holder: MealViewHolder, position: Int) {
         val meal = differ.currentList[position]
         holder.itemView.apply {
-            holder.mealImage?.let { imageView ->
+            holder.mealImage.let { imageView ->
                 Glide.with(this)
                     .load(meal.strMealThumb.ifEmpty { R.drawable.ic_launcher_foreground })
                     .into(imageView)

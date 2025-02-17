@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myfoods.Adapter.CategoryAdapter
 import com.example.myfoods.Model.Category
 import com.example.myfoods.R
+import com.example.myfoods.Util.Constants
 import com.example.myfoods.databinding.FragmentCategoriesBinding
 
 
@@ -41,6 +43,9 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories), CategoryAdapt
     }
 
     override fun onCategoryClick(category: Category) {
-
+        val bundle = Bundle().apply {
+            putString(Constants.CATEGORY_NAV, category.strCategory)
+        }
+        findNavController().navigate(R.id.action_categoriesFragment_to_categoryDetail, bundle)
     }
 }

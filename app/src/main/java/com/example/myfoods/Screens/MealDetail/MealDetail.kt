@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.myfoods.Model.Meal
 import com.example.myfoods.R
+import com.example.myfoods.Util.Constants
 import com.example.myfoods.databinding.ActivityMealDetailesBinding
 
 
@@ -21,7 +22,7 @@ class MealDetail : Fragment(R.layout.activity_meal_detailes) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val meal = arguments?.getSerializable("meal") as Meal?
+        val meal = arguments?.getSerializable(Constants.MEAL_NAV) as Meal?
         if (meal != null) {
             viewModelFactory= DetailViewModelFactory(meal)
             viewModel = ViewModelProvider(this , viewModelFactory)[DetailViewModel::class.java]

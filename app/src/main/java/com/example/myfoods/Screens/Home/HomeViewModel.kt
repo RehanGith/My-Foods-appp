@@ -22,12 +22,12 @@ class HomeViewModel: ViewModel() {
 
     private var repository: MealRepo = MealRepo()
     private var _randomMeal = MutableLiveData<Meal>()
-    private var _popularItems = MutableLiveData<List<Meal>>()
+    private var _popularItems = MutableLiveData<List<MealX>>()
     private var _mealById = MutableLiveData<List<Meal>>()
     private var _categories = MutableLiveData<List<Category>>()
     val randomMeal: LiveData<Meal>
         get() = _randomMeal
-    val popularItems: MutableLiveData<List<Meal>>
+    val popularItems: MutableLiveData<List<MealX>>
         get() = _popularItems
     val mealById: LiveData<List<Meal>>
         get() = _mealById
@@ -57,16 +57,7 @@ class HomeViewModel: ViewModel() {
             override fun onResponse(p0: Call<PopularMeal>, response: Response<PopularMeal>) {
                 if(response.body() != null) {
                     val xMeal : List<MealX> = response.body()!!.meals
-                    Log.d("TEST", "meal id ${xMeal[0].idMeal} name ${xMeal.size}")
-                    val meals: List<Meal> = xMeal.map { mealX ->
-                        Meal(
-                            idMeal = mealX.idMeal,
-                            strMeal = mealX.strMeal,
-                            strMealThumb = mealX.strMealThumb
-                            // map other properties if needed
-                        )
-                    }
-                    _popularItems.value = meals
+                    _popularItems.value = xMeal
                 }
             }
             override fun onFailure(p0: Call<PopularMeal>, p1: Throwable) {

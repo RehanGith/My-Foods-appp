@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/_25sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragments.SearchFragment">
+    tools:context=".Screens.Search.SearchFragment">
 
 
 
@@ -20,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/search_box_background"
         android:paddingLeft="15dp"
-        android:hint="Type meal name ..."
+        android:hint="@string/type_meal_name"
         android:textSize="16sp"
         android:inputType="text"
         android:maxLines="1"/>

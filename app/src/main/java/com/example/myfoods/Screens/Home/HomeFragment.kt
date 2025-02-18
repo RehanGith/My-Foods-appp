@@ -63,6 +63,9 @@ class HomeFragment : Fragment(R.layout.fragment_home), MealAdapter.OnItemViewCli
                 onMealClick(meals[0])
             }
         }
+        binding.imgSearch.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+        }
 
     }
     private fun observeData() {

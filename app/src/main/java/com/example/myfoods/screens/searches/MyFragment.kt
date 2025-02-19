@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.myfoods.R
+import com.example.myfoods.Util.Constants
 import com.example.myfoods.databinding.FragmentMyBinding
 
 class MyFragment : Fragment(R.layout.fragment_my) {
@@ -29,6 +31,12 @@ class MyFragment : Fragment(R.layout.fragment_my) {
                 .load(it.strMealThumb)
                 .into(binding.imgSearchedMeal)
 
+        }
+        binding.imgSearchedMeal.setOnClickListener {
+            val bundle = Bundle().apply {
+                putSerializable(Constants.MEAL_NAV, searchViewModel.searchResult.value)
+            }
+            findNavController().navigate(R.id.action_myFragment_to_mealDetail, bundle)
         }
     }
 

@@ -6,12 +6,15 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myfoods.adapter.FavAdapter
 import com.example.myfoods.model.Meal
 import com.example.myfoods.model.MealDB
 import com.example.myfoods.R
 import com.example.myfoods.Util.Constants
 import com.example.myfoods.databinding.FragmentFavoritesBinding
+import com.google.android.material.snackbar.Snackbar
 
 
 class FavoritesFragment : Fragment(R.layout.fragment_favorites), FavAdapter.OnFavClickListener {
@@ -33,6 +36,32 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), FavAdapter.OnFa
             }else {
                 binding.tvFavEmpty.visibility = View.VISIBLE
             }
+        }
+        val itemTouchHelper = object :  ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val meal = favAdapter.differ.currentList[position]
+                viewModel.deleteMeal(meal)
+                Snackbar.make(view, "Successfully deleted article", Snackbar.LENGTH_LONG).apply {
+                    setAction("Undo") {
+                        viewModel.addToFavorites(meal)
+                    }
+                    show()
+                }
+            }
+
+        }
+        ItemTouchHelper(itemTouchHelper).apply {
+            attachToRecyclerView(binding.favRecView)
         }
     }
     private fun setUpRecyclerView() {

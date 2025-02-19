@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/myfont"
-                android:text="fast food"
+                android:text="@string/fast_food"
                 android:textColor="#232323"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/img_category"

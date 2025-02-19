@@ -14,13 +14,15 @@ import com.example.myfoods.R
 import com.example.myfoods.Util.Constants
 import com.example.myfoods.adapter.FavAdapter
 import com.example.myfoods.adapter.MealAdapter
+import com.example.myfoods.adapter.SearchAdapter
 import com.example.myfoods.databinding.FragmentMyBinding
+import com.example.myfoods.model.Meal
 import com.example.myfoods.model.MealDB
 
-class MyFragment : Fragment(R.layout.fragment_my), MealAdapter.OnItemViewClick {
+class MyFragment : Fragment(R.layout.fragment_my), SearchAdapter.onSearchItemClick {
     lateinit var binding: FragmentMyBinding
     private val searchViewModel: MyViewModel by viewModels()
-    private lateinit var myAdapter: MealAdapter
+    private lateinit var myAdapter: SearchAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMyBinding.bind(view)
@@ -33,7 +35,7 @@ class MyFragment : Fragment(R.layout.fragment_my), MealAdapter.OnItemViewClick {
         }
     }
     fun setUpRecyclerView() {
-        myAdapter = MealAdapter(this, MealAdapter.SINGLE_MEAL_VIEW_TYPE)
+        myAdapter = SearchAdapter(this)
         binding.rvFav.apply {
             adapter = myAdapter
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
@@ -41,8 +43,12 @@ class MyFragment : Fragment(R.layout.fragment_my), MealAdapter.OnItemViewClick {
         }
     }
 
-    override fun onFavClick(meal: MealDB) {
-        TODO("Not yet implemented")
+    override fun onItemClick(meal: Meal) {
+        val bundle = Bundle().apply {
+            putSerializable(Constants.MEAL_NAV, meal)
+        }
+        findNavController().navigate(R.id.action_myFragment_to_mealDetail, bundle)
     }
+
 
 }

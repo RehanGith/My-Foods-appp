@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.myfoods.model.Meal
 import com.example.myfoods.model.RandomMeal
 import com.example.myfoods.repository.MealRepo
@@ -21,7 +22,13 @@ class MyViewModel : ViewModel() {
     private val repository = MealRepo()
     val searchResult: LiveData<List<Meal>>
         get() = _searchResult
-
+    init {
+        viewModelScope.launch {
+            query.observeForever {
+                searchByName()
+            }
+        }
+    }
     fun searchByName() {
         Log.d("SearchViewModel 1", query.value.toString())
         if (query.value.isNullOrEmpty()) return

@@ -17,8 +17,8 @@
             android:id="@+id/action_homeFragment_to_categoryDetail"
             app:destination="@id/categoryDetail" />
         <action
-            android:id="@+id/action_homeFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
+            android:id="@+id/action_homeFragment_to_myFragment"
+            app:destination="@id/myFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
@@ -61,11 +61,11 @@
             app:destination="@id/mealDetail" />
     </fragment>
     <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.example.myfoods.screens.search.SearchFragment"
-        android:label="SearchFragment" >
+        android:id="@+id/myFragment"
+        android:name="com.example.myfoods.screens.searches.MyFragment"
+        android:label="MyFragment" >
         <action
-            android:id="@+id/action_searchFragment_to_mealDetail"
+            android:id="@+id/action_myFragment_to_mealDetail"
             app:destination="@id/mealDetail" />
     </fragment>
 

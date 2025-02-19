@@ -17,4 +17,5 @@
     <string name="tvCategoryName">%1$s  :%2$s</string>
     <string name="no_favorites">No Favorites...</string>
     <string name="type_meal_name">Type meal name ...</string>
+    <string name="image_of_search">image of search</string>
 </resources>

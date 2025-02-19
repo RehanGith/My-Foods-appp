@@ -3,6 +3,7 @@ package com.example.myfoods.screens.category
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,13 +17,14 @@ import com.example.myfoods.databinding.FragmentCategoriesBinding
 class CategoriesFragment : Fragment(R.layout.fragment_categories), CategoryAdapter.OnCategoryClickListener {
 
     private lateinit var binding: FragmentCategoriesBinding
-    private lateinit var viewModel : ViewModelForCategories
+    private val viewModel : ViewModelForCategories by viewModels()
     private lateinit var categoriesAdapter : CategoryAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCategoriesBinding.bind(view)
-        viewModel = ViewModelProvider(this)[ViewModelForCategories::class.java]
+        binding.categoryViewModel = viewModel
+        binding.lifecycleOwner = this
         setUpRecyclerView()
         viewModel.categories.observe(viewLifecycleOwner) {
             categoriesAdapter.differ.submitList(it)

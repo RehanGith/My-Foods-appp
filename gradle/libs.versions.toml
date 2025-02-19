@@ -1,5 +1,5 @@
 [versions]
-agp = "8.4.0"
+agp = "8.4.2"
 kotlin = "1.9.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -43,6 +43,7 @@ android-logging-interceptor = {group = "com.squareup.okhttp3", name = "logging-i
 jetbrains-coroutine-kotlinx = {group = "org.jetbrains.kotlinx", name  = "kotlinx-coroutines-android", version.ref = "coroutine"}
 jetbrains-coroutine-core = {group = "org.jetbrains.kotlinx", name  = "kotlinx-coroutines-core", version.ref = "coroutine"}
 androidx-room-ktx = {group = "androidx.room", name = "room-ktx", version.ref = "room"}
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

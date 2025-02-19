@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.myfoods.Screens.Home.HomeFragment"
+        android:name="com.example.myfoods.screens.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -16,13 +16,10 @@
         <action
             android:id="@+id/action_homeFragment_to_categoryDetail"
             app:destination="@id/categoryDetail" />
-        <action
-            android:id="@+id/action_homeFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.example.myfoods.Screens.Favorites.FavoritesFragment"
+        android:name="com.example.myfoods.screens.favorites.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" >
         <action
@@ -31,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/categoriesFragment"
-        android:name="com.example.myfoods.Screens.Category.CategoriesFragment"
+        android:name="com.example.myfoods.screens.category.CategoriesFragment"
         android:label="fragment_categories"
         tools:layout="@layout/fragment_categories" >
         <action
@@ -40,17 +37,17 @@
     </fragment>
     <fragment
         android:id="@+id/mealDetail"
-        android:name="com.example.myfoods.Screens.MealDetail.MealDetail"
+        android:name="com.example.myfoods.screens.meal_detail.MealDetail"
         android:label="activity_meal_detailes"
         tools:layout="@layout/activity_meal_detailes">
         <argument
             android:name="meal"
-            app:argType="com.example.myfoods.Model.Meal"
+            app:argType="com.example.myfoods.model.Meal"
         />
     </fragment>
     <fragment
         android:id="@+id/categoryDetail"
-        android:name="com.example.myfoods.Screens.CategoryDetail.CategoryDetail"
+        android:name="com.example.myfoods.screens.category_detail.CategoryDetail"
         android:label="fragment_category_detail"
         tools:layout="@layout/fragment_category_detail">
         <argument
@@ -58,15 +55,6 @@
             app:argType="string" />
         <action
             android:id="@+id/action_categoryDetail_to_mealDetail"
-            app:destination="@id/mealDetail" />
-    </fragment>
-    <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.example.myfoods.Screens.Search.SearchFragment"
-        android:label="fragment_search"
-        tools:layout="@layout/fragment_search" >
-        <action
-            android:id="@+id/action_searchFragment_to_mealDetail"
             app:destination="@id/mealDetail" />
     </fragment>
 

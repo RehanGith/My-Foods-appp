@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     //viewModel
     implementation(libs.androidx.lifecyle.viewmodel)
+    implementation(libs.androidx.lifecyle.livedata)
     //coroutines
     implementation(libs.jetbrains.coroutine.core)
     implementation(libs.jetbrains.coroutine.kotlinx)

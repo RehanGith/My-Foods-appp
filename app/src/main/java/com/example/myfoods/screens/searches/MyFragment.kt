@@ -8,36 +8,41 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myfoods.R
 import com.example.myfoods.Util.Constants
+import com.example.myfoods.adapter.FavAdapter
+import com.example.myfoods.adapter.MealAdapter
 import com.example.myfoods.databinding.FragmentMyBinding
+import com.example.myfoods.model.MealDB
 
-class MyFragment : Fragment(R.layout.fragment_my) {
+class MyFragment : Fragment(R.layout.fragment_my), MealAdapter.OnItemViewClick {
     lateinit var binding: FragmentMyBinding
     private val searchViewModel: MyViewModel by viewModels()
+    private lateinit var myAdapter: MealAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMyBinding.bind(view)
 
         binding.mySearch = searchViewModel
         binding.lifecycleOwner = this
-
+        setUpRecyclerView()
         searchViewModel.searchResult.observe(viewLifecycleOwner) {
-            binding.searchedMealCard.visibility = View.VISIBLE
-            Log.d("Search", "onViewCreated: ${it.strMeal}")
-            binding.tvSearchedMeal.text = it.strMeal ?: ""
-            Glide.with(requireContext())
-                .load(it.strMealThumb)
-                .into(binding.imgSearchedMeal)
+            myAdapter.differ.submitList(it)
+        }
+    }
+    fun setUpRecyclerView() {
+        myAdapter = MealAdapter(this, MealAdapter.SINGLE_MEAL_VIEW_TYPE)
+        binding.rvFav.apply {
+            adapter = myAdapter
+            layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
+            setHasFixedSize(true)
+        }
+    }
 
-        }
-        binding.imgSearchedMeal.setOnClickListener {
-            val bundle = Bundle().apply {
-                putSerializable(Constants.MEAL_NAV, searchViewModel.searchResult.value)
-            }
-            findNavController().navigate(R.id.action_myFragment_to_mealDetail, bundle)
-        }
+    override fun onFavClick(meal: MealDB) {
+        TODO("Not yet implemented")
     }
 
 }

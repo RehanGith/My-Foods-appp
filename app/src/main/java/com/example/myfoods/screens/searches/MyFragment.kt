@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myfoods.R
 import com.example.myfoods.Util.Constants
@@ -31,14 +32,16 @@ class MyFragment : Fragment(R.layout.fragment_my), SearchAdapter.onSearchItemCli
         binding.lifecycleOwner = this
         setUpRecyclerView()
         searchViewModel.searchResult.observe(viewLifecycleOwner) {
+            Log.d("SearchFragment  ", "onViewCreated: ${it.size}")
             myAdapter.differ.submitList(it)
+            Log.d("SearchFragment  ", "onViewCreated: ${myAdapter.differ.currentList.size}")
         }
     }
     fun setUpRecyclerView() {
         myAdapter = SearchAdapter(this)
         binding.rvFav.apply {
             adapter = myAdapter
-            layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
         }
     }
